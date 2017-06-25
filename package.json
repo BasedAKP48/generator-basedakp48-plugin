@@ -1,6 +1,6 @@
 {
   "name": "generator-basedakp48-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scaffold out a BasedAKP48 plugin",
   "license": "MIT",
   "repository": "BasedAKP48/generator-basedakp48-plugin",

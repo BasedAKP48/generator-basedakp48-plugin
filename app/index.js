@@ -8,7 +8,7 @@ const normalizeName = (name) => {
 	if(!name.startsWith('basedakp48-plugin-')) {
 		name = `basedakp48-plugin-${name}`;
 	}
-	return name.toLowercase();
+	return name.toLowerCase();
 }
 
 module.exports = class extends Generator {
