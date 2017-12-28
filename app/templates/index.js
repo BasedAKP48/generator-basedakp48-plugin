@@ -39,5 +39,5 @@ function sendMessage(msg, text) {
     timeReceived: Date.now()
   };
 
-  return rootRef.child('pendingMessages').push().set(response);
+  return rootRef.child('pendingMessages').push(response);
 }
