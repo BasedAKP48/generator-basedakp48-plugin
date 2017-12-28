@@ -19,7 +19,19 @@ admin.initializeApp({
 
 const rootRef = admin.database().ref();
 
-rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('child_added', (e) => {
+// Listen to all messages (made after we started)
+rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('child_added', readMessage);
+
+// Listen to messages sent directly to us (including pre-existing messages)
+rootRef.child('clients/<%= moduleName %>').on('child_added', (e) => {
+  readMessage(e);
+  e.ref.delete(); // Delete messages after handling them
+});
+
+// Send test message
+sendMessage('test');
+
+function readMessage(e) {
   let msg = e.val();
   console.log(msg);
   let text = msg.text.toLowerCase();
@@ -27,25 +39,17 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
 	if(text == 'test') {
 		sendMessage(msg, 'It works!');
 	}
+}
 
-});
-
-function sendMessage(msg, text) {
+function sendMessage(text) {
   let response = {
     uid: '<%= moduleName %>',
-    cid: '<%= moduleName %>',
+    target: '<%= moduleName %>',
     text: text,
-    channel: msg.channel,
+    channel: 'testChannel',
     msgType: 'chatMessage',
     timeReceived: Date.now()
   }
 
-  let responseRef = rootRef.child('messages').push();
-  let responseKey = responseRef.key;
-
-  let updateData = {};
-  updateData[`messages/${responseKey}`] = response;
-  updateData[`clients/${msg.cid}/${responseKey}`] = response;
-
-  return rootRef.update(updateData);
+  return rootRef.child('pendingMessages').push().set(response);
 }
