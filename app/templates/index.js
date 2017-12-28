@@ -20,36 +20,24 @@ admin.initializeApp({
 const rootRef = admin.database().ref();
 
 // Listen to all messages (made after we started)
-rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('child_added', readMessage);
-
-// Listen to messages sent directly to us (including pre-existing messages)
-rootRef.child('clients/<%= moduleName %>').on('child_added', (e) => {
-  readMessage(e);
-  e.ref.delete(); // Delete messages after handling them
-});
-
-// Send test message
-sendMessage('test');
-
-function readMessage(e) {
+rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('child_added', (e) => {
   let msg = e.val();
   console.log(msg);
   let text = msg.text.toLowerCase();
+  if (text === 'test') {
+    sendMessage(msg, 'It works!');
+  }
+});
 
-	if(text == 'test') {
-		sendMessage(msg, 'It works!');
-	}
-}
-
-function sendMessage(text) {
+function sendMessage(msg, text) {
   let response = {
     uid: '<%= moduleName %>',
-    target: '<%= moduleName %>',
+    target: msg.cid,
+    channel: msg.channel,
     text: text,
-    channel: 'testChannel',
     msgType: 'chatMessage',
     timeReceived: Date.now()
-  }
+  };
 
   return rootRef.child('pendingMessages').push().set(response);
 }
