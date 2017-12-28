@@ -14,7 +14,7 @@ const serviceAccount = require("./serviceAccount.json");
 // Initialize the Firebase app. Change the URL below if you're using another Firebase database.
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://basedakp48.firebaseio.com"
+  databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
 });
 
 const rootRef = admin.database().ref();
