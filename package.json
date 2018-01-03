@@ -1,5 +1,5 @@
 {
-  "name": "generator-basedakp48-plugin",
+  "name": "@basedakp48/generator-plugin",
   "version": "1.1.1",
   "description": "Scaffold out a BasedAKP48 plugin",
   "license": "MIT",
@@ -9,6 +9,9 @@
     "email": "austin@akpwebdesign.com",
     "url": "https://blog.akpwebdesign.com"
   },
+  "contributors": [
+    "Alan H (feildmaster) <akp48@feildmaster.com> (https://feildmaster.com/)"
+  ],
   "engines": {
     "node": ">=4"
   },
@@ -17,15 +20,8 @@
   ],
   "keywords": [
     "yeoman-generator",
-    "plugin",
-    "template",
-    "scaffold",
-    "node",
-    "module",
-    "node_module",
-    "node-module",
-    "init",
-    "basedakp48"
+    "basedakp48",
+    "basedakp48-plugin-generator"
   ],
   "dependencies": {
     "humanize-url": "^1.0.1",
