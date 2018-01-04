@@ -1,11 +1,11 @@
-# generator-basedakp48-plugin
+# @basedakp48/generator-plugin
 
 > Scaffold out a [BasedAKP48](https://github.com/BasedAKP48) plugin.
 
 ## Install
 
 ```
-$ npm install --global yo generator-basedakp48-plugin
+$ npm install --global @basedakp48/generator-plugin
 ```
 
 
@@ -14,7 +14,7 @@ $ npm install --global yo generator-basedakp48-plugin
 With [yo](https://github.com/yeoman/yo):
 
 ```
-$ yo basedakp48-plugin
+$ yo @basedakp48/plugin
 ```
 
 ## License
